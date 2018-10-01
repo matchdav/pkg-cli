@@ -1,0 +1,30 @@
+{
+  "name": "mcd-pkg",
+  "version": "1.0.0",
+  "author": "matchdav",
+  "bin": {
+    "pkg": "bin/run"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
+    "minimist": "^1.2.0",
+    "require-dir": "^1.1.0",
+    "sort-keys": "^2.0.0"
+  },
+  "devDependencies": {
+    "commitizen": "^3.0.1",
+    "cz-conventional-changelog": "^2.1.0"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "src/cli.js",
+  "scripts": {
+    "commit": "git-cz"
+  }
+}
