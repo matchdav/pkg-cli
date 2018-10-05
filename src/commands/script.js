@@ -1,26 +1,20 @@
-const BaseCommand = require('../lib/command')
-const helpers = require('../lib/helpers')
-const set = require('lodash.set')
-const get = require('lodash.get')
-const sortKeys = require('sort-keys')
+const {Command, flags} = require('@oclif/command')
 
-module.exports = class Command extends BaseCommand {
-    get readonly(){
-        return false
-    }
-    run(args) {
-        const pairs = helpers.chunkArray(args, 2)
-        const scripts = get(this.pkg.data, 'scripts', {})
-        try {
-            pairs.forEach(pair => {
-                const [key, value] = pair;
-                set(scripts, key, value)
-            });
-            sortKeys(scripts)
-            set(this.pkg.data, 'scripts', scripts)
-            return {scripts}
-        } catch (e) {
-            console.error({ e })
-        }
-    }
+class ScriptCommand extends Command {
+  async run() {
+    const {flags} = this.parse(ScriptCommand)
+    const name = flags.name || 'world'
+    this.log(`hello ${name} from /home/mcd/projects/pkg-cli/src/commands/script.js`)
+  }
 }
+
+ScriptCommand.description = `Describe the command here
+...
+Extra documentation goes here
+`
+
+ScriptCommand.flags = {
+  list: flags.string({char: 'l', description: 'list keys only'}),
+}
+
+module.exports = ScriptCommand

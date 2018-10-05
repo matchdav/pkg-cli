@@ -1,16 +1,16 @@
 {
-  "name": "mcd-pkg",
+  "name": "pkg-cli",
+  "description": "package.json operations",
   "version": "1.0.0",
   "author": "matchdav",
   "bin": {
     "pkg": "bin/run"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
+  "bugs": "https://github.com/matchdav/pkg-cli/issues",
   "dependencies": {
+    "@oclif/command": "^1.5.1",
+    "@oclif/config": "^1.7.6",
+    "@oclif/plugin-help": "^2.1.2",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "minimist": "^1.2.0",
@@ -19,12 +19,43 @@
   },
   "devDependencies": {
     "commitizen": "^3.0.1",
-    "cz-conventional-changelog": "^2.1.0"
+    "cz-conventional-changelog": "^2.1.0",
+    "@oclif/dev-cli": "^1.19.0",
+    "@oclif/test": "^1.2.1",
+    "chai": "^4.1.2",
+    "eslint": "^5.5.0",
+    "eslint-config-oclif": "^3.1.0",
+    "globby": "^8.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/matchdav/pkg-cli",
   "keywords": [],
   "license": "MIT",
   "main": "src/cli.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "pkg",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "matchdav/pkg-cli",
   "scripts": {
     "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

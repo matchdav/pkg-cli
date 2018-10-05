@@ -1,17 +1,19 @@
-const BaseCommand = require('../lib/command')
-const helpers = require('../lib/helpers')
-const set = require('lodash.set')
+const {Command, flags} = require('@oclif/command')
 
-module.exports = class Command extends BaseCommand { 
-    run(args){
-        const pairs = helpers.chunkArray(args, 2)
-        try {
-            pairs.forEach(pair => {
-                const [key, value] = pair;
-                set(this.pkg.data, key, value)
-            });
-        } catch (e) {
-            console.error({e})
-        }
-    }
+class SetCommand extends Command {
+  async run() {
+    const {flags, args} = this.parse(SetCommand)
+  }
 }
+SetCommand.strict = false
+
+SetCommand.description = `Set package.json field
+...
+e.g. pkg set publishConfig.registry $(npm config get @myorg:registry)
+`
+
+SetCommand.flags = {
+  write: flags.string({char: 'w', description: 'modify package.json in-place'}),
+}
+
+module.exports = SetCommand
