@@ -30,6 +30,7 @@
   "main": "src/cli.js",
   "scripts": {
     "commit": "git-cz",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "bump": "standard-version"
   }
 }
