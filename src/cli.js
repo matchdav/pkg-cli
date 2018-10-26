@@ -1,21 +1,22 @@
-const requireDir = require('require-dir')
-const get = require('lodash.get')
-const assert = require('assert')
+const requireDir = require('require-dir');
+const get = require('lodash.get');
+const assert = require('assert');
+const helpers = require('./lib/helpers');
 
-const commands = requireDir('./commands')
+const commands = requireDir('./commands');
 
 module.exports = function (_argv) {
-    const argv = require('minimist')(_argv)
+    const argv = require('minimist')(_argv);
     const { _, ...options } = argv;
     const [cmd, ...args] = _;
     try {
-        assert(cmd in commands)
+        assert(cmd in commands);
     } catch (error) {
-        console.error(`Unrecognized command '${cmd}'`)
-        console.log(`Allowed commands: ${Object.keys(commands).join(', ')}`)
-        throw error
+        helpers.error(`Unrecognized command '${cmd}'`);
+        helpers.log(`Allowed commands: ${Object.keys(commands).join(', ')}`);
+        process.exit(1);
     }
-    const Command = get(commands, cmd)
-    const command = new Command({ options, cwd: process.cwd() })
-    command.exec(args)
-}
+    const Command = get(commands, cmd);
+    const command = new Command({ options, cwd: process.cwd() });
+    command.exec(args);
+};

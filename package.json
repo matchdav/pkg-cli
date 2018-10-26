@@ -28,6 +28,7 @@
   "license": "MIT",
   "main": "src/cli.js",
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "lint": "eslint src"
   }
 }
