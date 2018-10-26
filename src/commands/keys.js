@@ -5,7 +5,7 @@ const flat = require('flat');
 module.exports = class Command extends GetCommand {
     run(args) {
         const result = flat(super.run(args) || {});
-        return keys(result);
+        return keys(result).join('\n');
     }
     get readonly() {
         return true;
