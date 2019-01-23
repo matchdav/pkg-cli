@@ -11,8 +11,8 @@ module.exports = class PackageCommand {
             data: helpers.readJSON(path.join(this.cwd, 'package.json'))
         };
     }
-    exec(args) {
-        const result = this.run(args);
+    async exec(args) {
+        const result = await this.run(args);
         if(this.readonly) {
             return this.log(result);
         }
