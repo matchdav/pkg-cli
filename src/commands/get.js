@@ -2,6 +2,10 @@ const BaseCommand = require("../lib/command");
 const get = require("lodash.get");
 const set = require("lodash.set");
 module.exports = class Command extends BaseCommand {
+  mapArgs(args) {
+    const [_, ...keys] = args._;
+    return [...keys];
+  }
   run(args) {
     if (args.length === 1) {
       return get(this.pkg.data, args[0]);

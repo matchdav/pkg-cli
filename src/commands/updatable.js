@@ -6,11 +6,7 @@ const exec = promisify(require("child_process").exec);
 const semver = require("semver");
 module.exports = class Command extends BaseCommand {
   async info(pkg, ...fields) {
-    const { stdout } = await exec(
-      `npm view ${pkg} ${fields.join(
-        " "
-      )} -j`
-    );
+    const { stdout } = await exec(`npm view ${pkg} ${fields.join(" ")} -j`);
     return JSON.parse(stdout);
   }
   async run(filters) {

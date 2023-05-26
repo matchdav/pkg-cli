@@ -3,9 +3,21 @@ const helpers = require("./helpers");
 const sortKeys = require("sort-keys");
 
 module.exports = class PackageCommand {
-  constructor({ options }) {
-    this.options = {...options};
-    this.cwd = path.resolve(process.cwd(), options.cwd || "");
+  configure(yargs) {
+    return yargs;
+  }
+  mapArgs(args) {
+    const [_, ...keys] = args._;
+    return [...keys];
+  }
+  async handler(yargs) {
+    const args = this.mapArgs(yargs);
+    return this.exec(args);
+  }
+  description = "";
+  constructor(options) {
+    this.options = { ...options };
+    this.cwd = path.resolve(process.cwd(), (options && options.cwd) || "");
     this.pkg = {
       filename: path.join(this.cwd, "package.json"),
       data: helpers.readJSON(path.join(this.cwd, "package.json")),
